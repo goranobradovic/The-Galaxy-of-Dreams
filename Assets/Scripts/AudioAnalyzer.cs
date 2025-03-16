@@ -33,9 +33,9 @@ public class AudioAnalyzer : MonoBehaviour
     public float[] BandBuffer => bandBuffer;
     
     // Specific band getters for easy access
-    public float Bass => freqBands[0] + freqBands[1];
-    public float Mids => freqBands[2] + freqBands[3] + freqBands[4];
-    public float Highs => freqBands[5] + freqBands[6] + freqBands[7];
+    public float Bass => (freqBands[0] + freqBands[1]) * bassImpact;
+    public float Mids => (freqBands[2] + freqBands[3] + freqBands[4]) * midImpact;
+    public float Highs => (freqBands[5] + freqBands[6] + freqBands[7]) * highImpact;
     
     private void Start()
     {
@@ -80,7 +80,7 @@ public class AudioAnalyzer : MonoBehaviour
     
     private void GetSpectrumData()
     {
-        audioSource.GetSpectrumData(samples, 0, FFTWindow.Blackman);
+        audioSource.GetSpectrumData(samples, 0, FFTWindow.Hamming);
     }
     
     private void MakeFrequencyBands()

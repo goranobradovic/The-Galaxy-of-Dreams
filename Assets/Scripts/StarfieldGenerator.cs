@@ -125,10 +125,10 @@ public class StarfieldGenerator : MonoBehaviour
             // Create spiral arm effect
             float armCount = 2f; // Number of spiral arms
             float armTightness = 0.2f; // How tightly wound the arms are
-            float armRandomness = 0.2f; // How much stars can deviate from perfect spiral
+            float armRandomness = 0.3f; // How much stars can deviate from perfect spiral
 
             // Choose whether this star is in an arm or scattered
-            bool inArm = Random.value < 0.9f; // 90% chance to be in an arm
+            bool inArm = Random.value < 0.85f; // 85% chance to be in an arm
 
             float angle;
             float radius;
@@ -136,7 +136,7 @@ public class StarfieldGenerator : MonoBehaviour
             {
                 // Place star in a spiral arm
                 angle = Random.Range(0f, Mathf.PI * 2f);
-                radius = (0.1f + 0.9f * angle / Mathf.PI / 2f) * fieldSize; // Base spiral shape
+                radius = (0.2f + 0.8f * angle / Mathf.PI / 2f) * fieldSize; // Base spiral shape
 
                 // Apply spiral arm tightness
                 angle += armTightness * radius / fieldSize; // Use armOffset to modify angle based on radius
@@ -182,11 +182,11 @@ public class StarfieldGenerator : MonoBehaviour
                 targetSize = Mathf.Lerp(maxStarSize, (minStarSize + maxStarSize) * 0.5f, t);
             }
 
-            
+
             int gradientIndex = i % 3;
 
 
-            initialSizes[i] = Random.Range(minStarSize * (gradientIndex + 1)/2, targetSize);
+            initialSizes[i] = Random.Range(minStarSize * (gradientIndex + 1), targetSize);
             stars[i].startSize = initialSizes[i];
 
             // Initial color - assign gradient based on index

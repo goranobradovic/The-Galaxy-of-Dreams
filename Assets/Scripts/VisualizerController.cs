@@ -76,11 +76,26 @@ public class VisualizerController : MonoBehaviour
         resetCameraAction.performed += ctx => ResetCameraPosition();
         resetCameraAction.Enable();
 
-        // Create movement input actions
-        moveForwardAction = new InputAction(type: InputActionType.Button, binding: "<Keyboard>/w");
-        moveBackwardAction = new InputAction(type: InputActionType.Button, binding: "<Keyboard>/s");
-        rotateLeftAction = new InputAction(type: InputActionType.Button, binding: "<Keyboard>/a");
-        rotateRightAction = new InputAction(type: InputActionType.Button, binding: "<Keyboard>/d");
+        // Create movement input actions with multiple bindings
+        moveForwardAction = new InputAction(type: InputActionType.Button);
+        moveForwardAction.AddCompositeBinding("1DAxis")
+            .With("Positive", "<Keyboard>/w")
+            .With("Positive", "<Keyboard>/upArrow");
+
+        moveBackwardAction = new InputAction(type: InputActionType.Button);
+        moveBackwardAction.AddCompositeBinding("1DAxis")
+            .With("Positive", "<Keyboard>/s")
+            .With("Positive", "<Keyboard>/downArrow");
+
+        rotateLeftAction = new InputAction(type: InputActionType.Button);
+        rotateLeftAction.AddCompositeBinding("1DAxis")
+            .With("Positive", "<Keyboard>/a")
+            .With("Positive", "<Keyboard>/leftArrow");
+
+        rotateRightAction = new InputAction(type: InputActionType.Button);
+        rotateRightAction.AddCompositeBinding("1DAxis")
+            .With("Positive", "<Keyboard>/d")
+            .With("Positive", "<Keyboard>/rightArrow");
 
         moveForwardAction.Enable();
         moveBackwardAction.Enable();
